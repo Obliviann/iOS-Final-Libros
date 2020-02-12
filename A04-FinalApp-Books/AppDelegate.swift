@@ -15,10 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    //se ejec después que la app arranque
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        //2.Recomendado poner dentro del didFinishLaunching, que lo ejecuta después de que la app arranque
-        //2.Llamamos a la func del DataHolder donde pusimos la segunda línea de inic de Firebase
+        //2.Llamamos a la func del DH donde pusimos la inic de Firebase
+        //// Override point for customization after application launch
         DataHolder.sharedInstance.initFirebase()
 
         return true

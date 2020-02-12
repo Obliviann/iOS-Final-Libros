@@ -9,7 +9,9 @@
 import UIKit
 import Firebase
 
+//static class that will maintain data consistency between views
 class DataHolder: NSObject {
+    
     static let sharedInstance:DataHolder = DataHolder()
     
     func initFirebase(){
