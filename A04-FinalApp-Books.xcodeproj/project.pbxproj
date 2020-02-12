@@ -15,6 +15,7 @@
 		EF6AC9B723F427CE00963758 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF6AC9B623F427CE00963758 /* Assets.xcassets */; };
 		EF6AC9BA23F427CE00963758 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF6AC9B823F427CE00963758 /* LaunchScreen.storyboard */; };
 		EF6AC9C223F42E7C00963758 /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6AC9C123F42E7C00963758 /* DataHolder.swift */; };
+		EF6AC9C423F4354E00963758 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF6AC9C323F4354E00963758 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		EF6AC9B923F427CE00963758 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF6AC9BB23F427CE00963758 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF6AC9C123F42E7C00963758 /* DataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
+		EF6AC9C323F4354E00963758 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		EF6AC9AB23F427C600963758 /* A04-FinalApp-Books */ = {
 			isa = PBXGroup;
 			children = (
+				EF6AC9C323F4354E00963758 /* GoogleService-Info.plist */,
 				EF6AC9AC23F427C600963758 /* AppDelegate.swift */,
 				EF6AC9AE23F427C600963758 /* ViewController.swift */,
 				EF6AC9B023F427C600963758 /* Main.storyboard */,
@@ -155,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF6AC9BA23F427CE00963758 /* LaunchScreen.storyboard in Resources */,
+				EF6AC9C423F4354E00963758 /* GoogleService-Info.plist in Resources */,
 				EF6AC9B723F427CE00963758 /* Assets.xcassets in Resources */,
 				EF6AC9B223F427C600963758 /* Main.storyboard in Resources */,
 			);
@@ -362,7 +366,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "osf.A04-FinalApp-Books";
+				PRODUCT_BUNDLE_IDENTIFIER = "osf.A04-FinalBooks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -380,7 +384,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "osf.A04-FinalApp-Books";
+				PRODUCT_BUNDLE_IDENTIFIER = "osf.A04-FinalBooks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
