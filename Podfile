@@ -7,4 +7,5 @@ target 'A04-FinalApp-Books' do
 
   # Pods for A04-FinalApp-Books
   pod 'Firebase/Core'
+  pod 'Firebase'
 end

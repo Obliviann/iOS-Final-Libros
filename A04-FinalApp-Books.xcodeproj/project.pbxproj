@@ -14,6 +14,7 @@
 		EF6AC9B523F427C600963758 /* A04_FinalApp_Books.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF6AC9B323F427C600963758 /* A04_FinalApp_Books.xcdatamodeld */; };
 		EF6AC9B723F427CE00963758 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF6AC9B623F427CE00963758 /* Assets.xcassets */; };
 		EF6AC9BA23F427CE00963758 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF6AC9B823F427CE00963758 /* LaunchScreen.storyboard */; };
+		EF6AC9C223F42E7C00963758 /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6AC9C123F42E7C00963758 /* DataHolder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		EF6AC9B623F427CE00963758 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF6AC9B923F427CE00963758 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF6AC9BB23F427CE00963758 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF6AC9C123F42E7C00963758 /* DataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				EF6AC9B823F427CE00963758 /* LaunchScreen.storyboard */,
 				EF6AC9BB23F427CE00963758 /* Info.plist */,
 				EF6AC9B323F427C600963758 /* A04_FinalApp_Books.xcdatamodeld */,
+				EF6AC9C123F42E7C00963758 /* DataHolder.swift */,
 			);
 			path = "A04-FinalApp-Books";
 			sourceTree = "<group>";
@@ -165,16 +168,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-A04-FinalApp-Books/Pods-A04-FinalApp-Books-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -189,15 +188,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-A04-FinalApp-Books-checkManifestLockResult.txt",
 			);
@@ -216,6 +211,7 @@
 				EF6AC9AF23F427C600963758 /* ViewController.swift in Sources */,
 				EF6AC9AD23F427C600963758 /* AppDelegate.swift in Sources */,
 				EF6AC9B523F427C600963758 /* A04_FinalApp_Books.xcdatamodeld in Sources */,
+				EF6AC9C223F42E7C00963758 /* DataHolder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
