@@ -10,6 +10,10 @@ import UIKit
 import Firebase
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var usr: UITextField!
+    @IBOutlet weak var pass: UITextField!
+    @IBOutlet weak var loginBtn: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +24,10 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    /*@IBAction func SignUpBtn(_ sender: Any){
+        self.performSegue(withIdentifier: "RegisterVC", sender: self)
+    }*/
 
 }
 

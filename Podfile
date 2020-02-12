@@ -6,6 +6,6 @@ target 'A04-FinalApp-Books' do
   use_frameworks!
 
   # Pods for A04-FinalApp-Books
-  pod 'Firebase/Core'
   pod 'Firebase'
+  pod 'Firebase/Auth'
 end
