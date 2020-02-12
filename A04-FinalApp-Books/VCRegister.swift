@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class VCRegister: UIViewController {
 
@@ -25,17 +26,36 @@ class VCRegister: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func CancelBtn(_sender: Any){
+    @IBAction func cancelBtn(_sender: Any){
         //NEVER GO BACK TO A VIEW CONTROLLER WITH A TRIG SEG
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
         self.present(vc!, animated: true, completion: nil)
     }
     
-    @IBAction func CreateAccountBtn(_ sender: Any) {
-        
+    @IBAction func createAccountBtn(_ sender: Any) {
+        if (password.text != passConfirm.text) {
+            let alertController = UIAlertController(title: "Password does not match", message: "Please re-type password", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            Auth.auth().createUser(withEmail: email.text!, password: password.text!) { (user, error) in
+                if error == nil {
+                    //self.performSegue(withIdentifier: "transGoSignUp", sender: self)
+                    //self.dismissViewControllerAnimated(true, completion: nil) FROM INTERNET
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+                    self.present(vc!, animated: true, completion: nil)
+                    print("USER ",user," was created")
+                }
+                else{
+                    let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        }
     }
-    
-    
 
     /*
     // MARK: - Navigation
