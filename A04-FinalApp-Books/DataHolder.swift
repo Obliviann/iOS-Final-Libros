@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 //static class that will maintain data consistency between views
 class DataHolder: NSObject {
