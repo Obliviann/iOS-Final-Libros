@@ -10,6 +10,10 @@ import UIKit
 import Firebase
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var pass: UITextField!
+    @IBOutlet weak var loginBtn: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +24,31 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    //remember user
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //retrieve the current user logged in whit the system:
+        if Auth.auth().currentUser != nil{
+            self.performSegue(withIdentifier: "loginSuccess", sender: nil)
+        }
+    }
+    
+    @IBAction func SignInBtn(_ sender: UIButton){
+        Auth.auth().signIn(withEmail: email.text!, password: pass.text!) { (user, error) in
+            if error == nil{
+                print("User ",user," signed in")
+                self.performSegue(withIdentifier: "loginSuccess", sender: self)
+            }
+            else{
+                print("ERROR EN LOGIN: ",error!)
+                let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(defaultAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
 
 }
 

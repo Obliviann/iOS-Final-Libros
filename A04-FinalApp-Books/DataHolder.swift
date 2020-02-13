@@ -13,8 +13,22 @@ import Firebase
 class DataHolder: NSObject {
     
     static let sharedInstance:DataHolder = DataHolder()
+    //var to handle the AUTHENTICATION STATE LISTENER:
+    var handle: AuthStateDidChangeListenerHandle?
     
     func initFirebase(){
         FirebaseApp.configure()
+    }
+    
+    func didUserStateChange() {
+        //We set a listener on the FIRAuth obj go get current USER STATE
+        //this listener gets called whenever the user's sing-in state changes
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            
+        }
+    }
+    
+    func detachStateListener() {
+        Auth.auth().removeStateDidChangeListener(handle!)
     }
 }
