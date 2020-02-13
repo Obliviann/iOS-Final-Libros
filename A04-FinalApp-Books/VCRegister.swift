@@ -41,11 +41,9 @@ class VCRegister: UIViewController {
         } else {
             Auth.auth().createUser(withEmail: email.text!, password: password.text!) { (user, error) in
                 if error == nil {
-                    //self.performSegue(withIdentifier: "transGoSignUp", sender: self)
-                    //self.dismissViewControllerAnimated(true, completion: nil) FROM INTERNET
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
-                    self.present(vc!, animated: true, completion: nil)
                     print("USER ",user," was created")
+                    //go back to LoginVC
+                    self.cancelBtn(_sender: (Any).self)
                 }
                 else{
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)

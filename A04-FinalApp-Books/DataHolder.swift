@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-//import FirebaseFirestore
 
 //static class that will maintain data consistency between views
 class DataHolder: NSObject {
@@ -27,7 +26,6 @@ class DataHolder: NSObject {
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             
         }
-        //self.gitHubProvider = OAuthProvider(providerID:"github.com");
     }
     
     func detachStateListener() {

@@ -17,6 +17,7 @@
 		EF6AC9C223F42E7C00963758 /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6AC9C123F42E7C00963758 /* DataHolder.swift */; };
 		EF6AC9C423F4354E00963758 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF6AC9C323F4354E00963758 /* GoogleService-Info.plist */; };
 		EF6AC9C623F46B7100963758 /* VCRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6AC9C523F46B7100963758 /* VCRegister.swift */; };
+		EFE1B8AD23F56CA6006FF04E /* VCProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE1B8AC23F56CA6006FF04E /* VCProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		EF6AC9C123F42E7C00963758 /* DataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
 		EF6AC9C323F4354E00963758 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF6AC9C523F46B7100963758 /* VCRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRegister.swift; sourceTree = "<group>"; };
+		EFE1B8AC23F56CA6006FF04E /* VCProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				EF6AC9B323F427C600963758 /* A04_FinalApp_Books.xcdatamodeld */,
 				EF6AC9C123F42E7C00963758 /* DataHolder.swift */,
 				EF6AC9C523F46B7100963758 /* VCRegister.swift */,
+				EFE1B8AC23F56CA6006FF04E /* VCProfile.swift */,
 			);
 			path = "A04-FinalApp-Books";
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 			files = (
 				EF6AC9AF23F427C600963758 /* ViewController.swift in Sources */,
 				EF6AC9AD23F427C600963758 /* AppDelegate.swift in Sources */,
+				EFE1B8AD23F56CA6006FF04E /* VCProfile.swift in Sources */,
 				EF6AC9C623F46B7100963758 /* VCRegister.swift in Sources */,
 				EF6AC9B523F427C600963758 /* A04_FinalApp_Books.xcdatamodeld in Sources */,
 				EF6AC9C223F42E7C00963758 /* DataHolder.swift in Sources */,
