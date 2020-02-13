@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //2.Llamamos a la func del DH donde pusimos la inic de Firebase
         //// Override point for customization after application launch
         DataHolder.sharedInstance.initFirebase()
-
         return true
     }
 

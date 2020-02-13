@@ -24,9 +24,14 @@ class VCProfile: UIViewController {
     }
     
     @IBAction func logOutAction(_ sender: UIButton) {
+        let user = Auth.auth().currentUser
+        if let usr = user {
+            DataHolder.sharedInstance.userAuth = usr
+            print("User ",usr.email," signing out!")
+        }
         do {
             try Auth.auth().signOut()
-        }
+            }
         catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }

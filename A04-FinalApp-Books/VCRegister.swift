@@ -43,9 +43,9 @@ class VCRegister: UIViewController {
             Auth.auth().createUser(withEmail: email.text!, password: password.text!) { (authDataResult, error) in
                 if error == nil {
                     let user = Auth.auth().currentUser
-                    if let user = user {
-                        DataHolder.sharedInstance.userAuth = user
-                        print("USER ",user," was created")
+                    if let usr = user {
+                        DataHolder.sharedInstance.userAuth = usr
+                        print("USER ",usr.email," was created")
                     }
                     //go back to LoginVC
                     self.cancelBtn(sender)

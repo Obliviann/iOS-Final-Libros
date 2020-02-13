@@ -52,7 +52,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <action selector="SignInBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LIs-qw-Dbn"/>
+                                    <action selector="signInBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dMp-uo-LBA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -91,7 +91,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cancel"/>
                                 <connections>
-                                    <action selector="cancelBtnWith_sender:" destination="S8Q-zD-iBt" eventType="touchUpInside" id="nrB-l8-Ddq"/>
+                                    <action selector="cancelBtn:" destination="S8Q-zD-iBt" eventType="touchUpInside" id="rPo-nI-nAr"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wJB-1c-jBO">
