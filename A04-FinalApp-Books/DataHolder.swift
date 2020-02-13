@@ -9,23 +9,40 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseFirestore
+
+//2
+protocol DHDelegate {
+    func DHUserLogin(usr: User)
+}
 
 //static class that will maintain data consistency between views
 class DataHolder: NSObject {
     
+    var delegate: DHDelegate?
+    
     static let sharedInstance:DataHolder = DataHolder()
-    //var to handle the AUTHENTICATION STATE LISTENER:
-    var handle: AuthStateDidChangeListenerHandle?
+    var handle: AuthStateDidChangeListenerHandle? //var to handle the AUTHENTICATION STATE LISTENER:
+    var userAuth:User?
+    var db: Firestore!
+    
     
     func initFirebase(){
         FirebaseApp.configure()
+        db = Firestore.firestore()
     }
     
     func didUserStateChange() {
         //We set a listener on the FIRAuth obj go get current USER STATE
         //this listener gets called whenever the user's sing-in state changes
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            
+            if let user = user {
+                // User is signed in.
+                DataHolder.sharedInstance.userAuth=user
+                self.delegate?.DHUserLogin(usr: user)
+            } else {
+                // No user is signed in.
+            }
         }
     }
     
