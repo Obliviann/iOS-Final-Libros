@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //retrieve the current user logged in whit the system:
-        if Auth.auth().currentUser != nil{
+        if Auth.auth().currentUser != nil {
             self.performSegue(withIdentifier: "loginSuccess", sender: nil)
         }
     }
@@ -38,8 +38,12 @@ class ViewController: UIViewController {
     @IBAction func SignInBtn(_ sender: UIButton){
         Auth.auth().signIn(withEmail: email.text!, password: pass.text!) { (user, error) in
             if error == nil{
-                print("User ",user," signed in")
-                self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                let user = Auth.auth().currentUser
+                if let user = user {
+                    DataHolder.sharedInstance.userAuth = user
+                    print("User ",user," signed in")
+                    self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                }
             }
             else{
                 print("ERROR EN LOGIN: ",error!)
