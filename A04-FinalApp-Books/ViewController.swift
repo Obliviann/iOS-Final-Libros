@@ -25,11 +25,16 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    /*@IBAction func SignUpBtn(_ sender: Any){
-        self.performSegue(withIdentifier: "RegisterVC", sender: self)
-    }*/
+    //remember user
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //retrieve the current user logged in whit the system:
+        if Auth.auth().currentUser != nil{
+            self.performSegue(withIdentifier: "loginSuccess", sender: nil)
+        }
+    }
     
-    @IBAction func SignInBtn(_ sender: Any){
+    @IBAction func SignInBtn(_ sender: UIButton){
         Auth.auth().signIn(withEmail: email.text!, password: pass.text!) { (user, error) in
             if error == nil{
                 print("User ",user," signed in")
@@ -43,7 +48,6 @@ class ViewController: UIViewController {
                 self.present(alertController, animated: true, completion: nil)
             }
         }
-
     }
 
 }

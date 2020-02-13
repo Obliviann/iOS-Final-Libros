@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class VCProfile: UIViewController {
 
@@ -21,10 +22,22 @@ class VCProfile: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func temp(){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
-        self.present(vc!, animated: true, completion: nil)
+    @IBAction func logOutAction(_ sender: UIButton) {
+        do {
+            try Auth.auth().signOut()
+        }
+        catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        //set the VC to it's root
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initial = storyboard.instantiateInitialViewController()
+        UIApplication.shared.keyWindow?.rootViewController = initial
+        //let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+        //self.present(vc!, animated: true, completion: nil)
     }
+    
+    
     /*
     // MARK: - Navigation
 

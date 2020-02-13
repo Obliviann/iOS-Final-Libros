@@ -26,13 +26,13 @@ class VCRegister: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func cancelBtn(_sender: Any){
+    @IBAction func cancelBtn(_ sender: UIButton){
         //NEVER GO BACK TO A VIEW CONTROLLER WITH A TRIG SEG
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
         self.present(vc!, animated: true, completion: nil)
     }
     
-    @IBAction func createAccountBtn(_ sender: Any) {
+    @IBAction func createAccountBtn(_ sender: UIButton) {
         if (password.text != passConfirm.text) {
             let alertController = UIAlertController(title: "Password does not match", message: "Please re-type password", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -43,7 +43,7 @@ class VCRegister: UIViewController {
                 if error == nil {
                     print("USER ",user," was created")
                     //go back to LoginVC
-                    self.cancelBtn(_sender: (Any).self)
+                    self.cancelBtn(sender)
                 }
                 else{
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
