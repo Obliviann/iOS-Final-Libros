@@ -13,6 +13,8 @@ import FirebaseFirestore
 
 //2
 protocol DHDelegate {
+    //https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseUser.html
+    //Represents a user. Fb Auth does not attempt to validate users when loading them from the keychain.
     func DHUserLogin(userr: User)
 }
 
@@ -21,27 +23,28 @@ class DataHolder: NSObject {
     
     var delegate: DHDelegate?
     
+    //1
     static let sharedInstance:DataHolder = DataHolder()
-    //listener to handle the AUTH STATE
-    //this listener gets called whenever the user's sing-in state changes
+    //listener to handle the AUTH STATE. Gets called whenever the user's sing-in state changes
+    //A handle useful for manually unregistering the block as a listener.
     var handle: AuthStateDidChangeListenerHandle?
-    var userAuth:User?
+    var firUser:User?
     var db: Firestore!
     
     
     func initFirebase(){
         FirebaseApp.configure()
         db = Firestore.firestore()
-    }
+    //}
     
-    //NOT ACTUALLY USING THIS since I'm usitn currentUser meth
-    func didUserStateChange() {
-        //We set a listener on the FIRAuth obj to GET THE CURRENTLY SIGNED-IN USER
+    //NOT ACTUALLY USING THIS ??
+    //func didUserStateChange() {
+                //We set a listener on the FIRAuth obj to GET THE CURRENTLY SIGNED-IN USER
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            //REPEATED CODE IN ALL VC
+            //Eliminamos el opcional ?, y con ello su posibilidad de que sea nil, a 'user' type User. same as if user !=    ???
             if let usr = user {
                 // User is signed in.
-                DataHolder.sharedInstance.userAuth = usr
+                DataHolder.sharedInstance.firUser = usr //whynot self (bcs of static       ?????)
                 self.delegate?.DHUserLogin(userr: usr)
             } else {
                 // No user is signed in.

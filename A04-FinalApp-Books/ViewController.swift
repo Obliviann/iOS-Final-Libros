@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var pass: UITextField!
-    @IBOutlet weak var loginBtn: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,21 +29,34 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //retrieve the current user logged in with the system:
-        //TODO: only do this whe usr has signed in, NOT when it created an account
-        if Auth.auth().currentUser != nil {
-            self.performSegue(withIdentifier: "loginSuccess", sender: nil)
+//        if Auth.auth().currentUser != nil {
+//            self.performSegue(withIdentifier: "loginSuccess", sender: nil)
+//        } SAME AS (better option ahead):
+
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if let usr = user {
+                //TODO: do not sign in automatically after sign up.
+                //Why is is called twice before creating usr ???. WHY doen's this if work   ????
+                //if usr.isEmailVerified {
+                    print(usr.email," is already signed in")
+                    self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                //self.login((Any).self) //-> throws "the pass is invalid of usr does not have a pass" err
+                //}
+            }
         }
+        
     }
     
-    @IBAction func signInBtn(_ sender: UIButton){
-        Auth.auth().signIn(withEmail: email.text!, password: pass.text!) { (user, error) in
-            if error == nil{
-                let user = Auth.auth().currentUser //TODO: change for DataHolder.sharedInstance.handle
-                if let usr = user {
-                    //DataHolder.sharedInstance.userAuth = usr
-                    print("User ",usr.email," signed in")
+    @IBAction func login(_ sender: Any){
+        Auth.auth().signIn(withEmail: email.text!, password: pass.text!) { (authData, error) in
+            if (error == nil) {
+                //GET A USER'S PROFILE (how to do with listener??)
+                let user = Auth.auth().currentUser //VS. DataHolder.sharedInstance.authListener ???
+//                if let usr = user {
+//                    DataHolder.sharedInstance.userAuth = usr
+                    print("User ",user?.email," signed in")
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
-                }
+//                }
             }
             else{
                 print("ERROR EN LOGIN: ",error!)

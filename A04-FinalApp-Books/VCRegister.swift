@@ -27,7 +27,7 @@ class VCRegister: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func cancelBtn(_ sender: UIButton){
+    @IBAction func loginBtn(_ sender: UIButton){
         //NEVER GO BACK TO A VIEW CONTROLLER WITH A TRIG SEG
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
         self.present(vc!, animated: true, completion: nil)
@@ -42,13 +42,21 @@ class VCRegister: UIViewController {
         } else {
             Auth.auth().createUser(withEmail: email.text!, password: password.text!) { (authDataResult, error) in
                 if error == nil {
-                    let user = Auth.auth().currentUser
-                    if let usr = user {
-                        DataHolder.sharedInstance.userAuth = usr
-                        print("USER ",usr.email," was created")
-                    }
-                    //go back to LoginVC
-                    self.cancelBtn(sender)
+                    Auth.auth().addStateDidChangeListener { (auth, user) in
+                        if let usr = user {
+                            DataHolder.sharedInstance.firUser = usr
+                            print("USER ",usr.email," was created")
+                        }
+                    } //SAME AS:
+//                    let user = Auth.auth().currentUser
+//                    if let usr = user {
+//                        DataHolder.sharedInstance.firUser = usr
+//                        print("USER ",usr.email," was created")
+//                    }
+                    let alertCont = UIAlertController(title: "You have created an account!", message: "Go to the LogIn page so you can Sign In with your new account", preferredStyle: .alert)//vs .actionSheet (greyish)
+                    let alertAct = UIAlertAction(title: "Neat, take me there pls", style: .cancel, handler: {action in self.loginBtn(sender)})
+                    alertCont.addAction(alertAct)
+                    self.present(alertCont, animated: true)
                 }
                 else{
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)

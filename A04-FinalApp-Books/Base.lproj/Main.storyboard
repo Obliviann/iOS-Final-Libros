@@ -52,7 +52,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <action selector="signInBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dMp-uo-LBA"/>
+                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DPi-ht-Az2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -61,7 +61,6 @@
                     </view>
                     <connections>
                         <outlet property="email" destination="Gr1-ie-NO2" id="5vV-Z1-eDc"/>
-                        <outlet property="loginBtn" destination="bXS-1b-7h7" id="GO2-Mv-Rvh"/>
                         <outlet property="pass" destination="MHe-ba-ppt" id="XAi-3F-QTv"/>
                         <segue destination="vfG-Vt-0oU" kind="show" identifier="loginSuccess" id="oSv-oz-5l6"/>
                     </connections>
@@ -87,11 +86,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFH-Bp-Xzb">
-                                <rect key="frame" x="176" y="503" width="48" height="30"/>
+                                <rect key="frame" x="161" y="503" width="79" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancel"/>
+                                <state key="normal" title="Go to Login"/>
                                 <connections>
-                                    <action selector="cancelBtn:" destination="S8Q-zD-iBt" eventType="touchUpInside" id="rPo-nI-nAr"/>
+                                    <action selector="loginBtn:" destination="S8Q-zD-iBt" eventType="touchUpInside" id="1ju-Vy-6Ch"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wJB-1c-jBO">

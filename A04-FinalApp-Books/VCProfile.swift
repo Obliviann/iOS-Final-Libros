@@ -26,7 +26,7 @@ class VCProfile: UIViewController {
     @IBAction func logOutAction(_ sender: UIButton) {
         let user = Auth.auth().currentUser
         if let usr = user {
-            DataHolder.sharedInstance.userAuth = usr
+            DataHolder.sharedInstance.firUser = usr
             print("User ",usr.email," signing out!")
         }
         do {
