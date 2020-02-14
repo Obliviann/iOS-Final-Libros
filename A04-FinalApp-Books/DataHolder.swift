@@ -42,15 +42,20 @@ class DataHolder: NSObject {
     //func didUserStateChange() {
         //We set a listener on the FIRAuth obj to GET THE CURRENTLY SIGNED-IN USER
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            //Eliminamos el opcional ?, y con ello su posibilidad de que sea nil, a 'user' type User. same as if user !=    ???
+            //Eliminamos el opcional ? aka su posibilidad de que sea nil, a 'user' type User.
+            //TODO: same as if user !=    ???
             if let usr = user {
-                // User is signed in.
+                //TODO: why?
                 DataHolder.sharedInstance.firUser = usr //whynot self (bcs of static       ?????)
                 self.delegate?.DHUserLogin(userr: usr)
-            } else {
-                // No user is signed in.
             }
         }
+        //SAME AS:
+//                    let user = Auth.auth().currentUser
+//                    if let usr = user {
+//                        DataHolder.sharedInstance.firUser = usr
+//                        self.delegate?.DHUserLogin(userr: usr)
+//                    }
     }
     
     func detachStateListener() {

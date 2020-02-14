@@ -44,15 +44,10 @@ class VCRegister: UIViewController {
                 if error == nil {
                     Auth.auth().addStateDidChangeListener { (auth, user) in
                         if let usr = user {
-                            DataHolder.sharedInstance.firUser = usr
+                            //DataHolder.sharedInstance.firUser = usr
                             print("USER ",usr.email," was created")
                         }
-                    } //SAME AS:
-//                    let user = Auth.auth().currentUser
-//                    if let usr = user {
-//                        DataHolder.sharedInstance.firUser = usr
-//                        print("USER ",usr.email," was created")
-//                    }
+                    }
                     let alertCont = UIAlertController(title: "You have created an account!", message: "Go to the LogIn page so you can Sign In with your new account", preferredStyle: .alert)//vs .actionSheet (greyish)
                     let alertAct = UIAlertAction(title: "Neat, take me there pls", style: .cancel, handler: {action in self.loginBtn(sender)})
                     alertCont.addAction(alertAct)

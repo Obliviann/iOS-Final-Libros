@@ -23,10 +23,11 @@ class VCProfile: UIViewController {
     }
     
     @IBAction func logOutAction(_ sender: UIButton) {
-        let user = Auth.auth().currentUser
+        Auth.auth().addStateDidChangeListener { (auth, user) in
         if let usr = user {
-            DataHolder.sharedInstance.firUser = usr
-            print("User ",usr.email," signing out!")    //TOD:why do I nedd to force-unwrap the value?
+            //DataHolder.sharedInstance.firUser = usr
+            print("User ",usr.email," signing out!")    //TODO:why do I need to force-unwrap the value?
+        }
         }
         do {
             try Auth.auth().signOut()

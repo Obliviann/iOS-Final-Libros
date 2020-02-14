@@ -37,24 +37,26 @@ class ViewController: UIViewController {
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if let usr = user {
                 //if usr.isEmailVerified {
+                //DataHolder.sharedInstance.firUser = usr
                     print(usr.email," is already signed in")
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
                 //TODO: self.login((Any).self) //-> throws "the pass is invalid of usr does not have a pass" err
                 //}
             }
         }
-        
+        Auth.auth().signIn(withEmail: <#T##String#>, password: <#T##String#>, completion: <#T##AuthDataResultCallback?##AuthDataResultCallback?##(AuthDataResult?, Error?) -> Void#>)
     }
-    
+
     @IBAction func login(_ sender: Any){
-        Auth.auth().signIn(withEmail: email.text!, password: pass.text!) { (authData, error) in
-            if (error == nil) {
+        Auth.auth().signIn(withEmail: email.text!, password: pass.text!) { (authDataResult, error) in
+            if error == nil {
                 //Done with listener in VCRegister
-                let user = Auth.auth().currentUser //VS. DataHolder.sharedInstance.handle ???
+                Auth.auth().addStateDidChangeListener { (auth, user) in //vs. let user = Auth.auth().currentUser
                 if let usr = user {
                     //DataHolder.sharedInstance.firUser = usr
                     print("User ",usr.email," signed in")
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                }
                 }
             }else{
                 print("ERROR EN LOGIN: ",error!)
