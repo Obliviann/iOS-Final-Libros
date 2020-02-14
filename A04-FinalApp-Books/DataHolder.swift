@@ -27,6 +27,7 @@ class DataHolder: NSObject {
     static let sharedInstance:DataHolder = DataHolder()
     //listener to handle the AUTH STATE. Gets called whenever the user's sing-in state changes
     //A handle useful for manually unregistering the block as a listener.
+    //Never used??
     var handle: AuthStateDidChangeListenerHandle?
     var firUser:User?
     var db: Firestore!
@@ -37,9 +38,9 @@ class DataHolder: NSObject {
         db = Firestore.firestore()
     //}
     
-    //NOT ACTUALLY USING THIS ??
+        //TODO: NOT ACTUALLY USING THIS ??
     //func didUserStateChange() {
-                //We set a listener on the FIRAuth obj to GET THE CURRENTLY SIGNED-IN USER
+        //We set a listener on the FIRAuth obj to GET THE CURRENTLY SIGNED-IN USER
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             //Eliminamos el opcional ?, y con ello su posibilidad de que sea nil, a 'user' type User. same as if user !=    ???
             if let usr = user {

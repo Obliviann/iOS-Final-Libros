@@ -14,7 +14,6 @@ class VCProfile: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -27,7 +26,7 @@ class VCProfile: UIViewController {
         let user = Auth.auth().currentUser
         if let usr = user {
             DataHolder.sharedInstance.firUser = usr
-            print("User ",usr.email," signing out!")
+            print("User ",usr.email," signing out!")    //TOD:why do I nedd to force-unwrap the value?
         }
         do {
             try Auth.auth().signOut()
