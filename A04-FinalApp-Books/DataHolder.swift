@@ -12,29 +12,42 @@ import FirebaseAuth
 import FirebaseFirestore
 
 //2
-protocol DHDelegate {
+//protocol DHDelegate {
     //https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseUser.html
-    //Represents a user. Fb Auth does not attempt to validate users when loading them from the keychain.
-    func DHUserLogin(userr: User)
-}
+    //Auth does not attempt to validate users when loading them from the keychain.
+    //func DHUserLogin(userr: User)
+//}
 
 //static class that will maintain data consistency between views
 class DataHolder: NSObject {
     
-    var delegate: DHDelegate?
+    //var delegate: DHDelegate?
     
-    //1
     static let sharedInstance:DataHolder = DataHolder()
     //A handle useful for manually unregistering the block as a listener.
-    //TODO: Never used??
-    var handle: AuthStateDidChangeListenerHandle?
+    var handle: AuthStateDidChangeListenerHandle? //TODO: Never used??
+    //Represents a User in FirebaseAuth
     var firUser:User?
     var db: Firestore!
-    
+    var settings: FirestoreSettings!
+    //to specify which DB doc we want to put data in 
+    var docRef: DocumentReference? = nil
     
     func initFirebase(){
         FirebaseApp.configure()
         db = Firestore.firestore()
+        //*
+        settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+        /*With this change, timestamps stored in Cloud Firestore will be read back as Firebase Timestamp objects instead of as system Date objects. So you will also need to update code expecting a Date to instead expect a Timestamp. For example:
+        // old:
+        let date: Date = documentSnapshot.get("created_at") as! Date
+        // new:
+        let timestamp: Timestamp = documentSnapshot.get("created_at") as! Timestamp
+        let date: Date = timestamp.dateValue()
+        Please audit all existing usages of Date when you enable the new behavior. In a future release, the behavior will be changed to the new behavior, so if you do not follow these steps, YOUR APP MAY BREAK.*/
+
     //}
     
     //func didUserStateChange() {
@@ -48,7 +61,7 @@ class DataHolder: NSObject {
             if let usr = user {
                 //TODO: why?
                 DataHolder.sharedInstance.firUser = usr //whynot self (bcs of static       ?????)
-                self.delegate?.DHUserLogin(userr: usr)
+                //self.delegate?.DHUserLogin(userr: usr)
             }
         }
         //same as (but better):
