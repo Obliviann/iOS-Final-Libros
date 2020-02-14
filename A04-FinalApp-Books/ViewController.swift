@@ -28,10 +28,6 @@ class ViewController: UIViewController {
     //remember user
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        if Auth.auth().currentUser != nil {
-//            self.performSegue(withIdentifier: "loginSuccess", sender: nil)
-//        } SAME AS (better option ahead):
-
         //TODO: do not sign in automatically after sign up.
         //TODO: it's called twice before creating usr ???. Why doen's this if work   ????
         Auth.auth().addStateDidChangeListener { (auth, user) in
@@ -44,13 +40,15 @@ class ViewController: UIViewController {
                 //}
             }
         }
-        Auth.auth().signIn(withEmail: <#T##String#>, password: <#T##String#>, completion: <#T##AuthDataResultCallback?##AuthDataResultCallback?##(AuthDataResult?, Error?) -> Void#>)
+        //same as (but better) than:
+        //if Auth.auth().currentUser != nil {
+        //self.performSegue(withIdentifier: "loginSuccess", sender: nil)
+        //}
     }
 
     @IBAction func login(_ sender: Any){
         Auth.auth().signIn(withEmail: email.text!, password: pass.text!) { (authDataResult, error) in
             if error == nil {
-                //Done with listener in VCRegister
                 Auth.auth().addStateDidChangeListener { (auth, user) in //vs. let user = Auth.auth().currentUser
                 if let usr = user {
                     //DataHolder.sharedInstance.firUser = usr
