@@ -23,16 +23,17 @@ class VCProfile: UIViewController {
     }
     
     @IBAction func logOutAction(_ sender: UIButton) {
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-        if let usr = user {
-            //DataHolder.sharedInstance.firUser = usr
-            print("User ",usr.email," signing out!")    //TODO:why do I need to force-unwrap the value?
-        }
-        }
         do {
-            try Auth.auth().signOut()
+            Auth.auth().addStateDidChangeListener { (auth, user) in
+                print("Why is is not getting in here??")
+                if let usr = user {
+                    //DataHolder.sharedInstance.firUser = usr
+                    print("User ",usr.email," signing out!")    //TODO:why do I need to force-unwrap the value?
+                }
             }
-        catch let signOutError as NSError {
+            try Auth.auth().signOut()
+            print("Im out!")
+        } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
         //set the VC to it's root

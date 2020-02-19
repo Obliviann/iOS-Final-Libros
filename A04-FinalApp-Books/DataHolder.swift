@@ -30,11 +30,24 @@ class DataHolder: NSObject {
     var handle: AuthStateDidChangeListenerHandle?
     var firUser:User?
     var db: Firestore!
-    
+    var settings: FirestoreSettings!
+    //to specify which DB doc we want to put data in
+    var docRef: DocumentReference? = nil
     
     func initFirebase(){
         FirebaseApp.configure()
         db = Firestore.firestore()
+        //*
+        settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+        /* With this change, timestamps stored in Cloud Firestore will be read back as Firebase Timestamp objects instead of as system Date objects. So you will also need to update code expecting a Date to instead expect a Timestamp. For example:
+         // old:
+         let date: Date = documentSnapshot.get("created_at") as! Date
+         // new:
+         let timestamp: Timestamp = documentSnapshot.get("created_at") as! Timestamp
+         let date: Date = timestamp.dateValue()
+         Please audit all existing usages of Date when you enable the new behavior. In a future release, the behavior will be changed to the new behavior, so if you do not follow these steps, YOUR APP MAY BREAK.*/
     //}
     
     //func didUserStateChange() {
