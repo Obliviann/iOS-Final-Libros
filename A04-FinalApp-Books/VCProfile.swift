@@ -23,24 +23,25 @@ class VCProfile: UIViewController {
     }
     
     @IBAction func logOutAction(_ sender: UIButton) {
+        print("Logoutbtn clicked!")
         Auth.auth().addStateDidChangeListener { (auth, user) in
         if let usr = user {
-            //DataHolder.sharedInstance.firUser = usr
-            print("User ",usr.email," signing out!")    //TODO:why do I need to force-unwrap the value?
-        }
-        }
-        do {
-            try Auth.auth().signOut()
+            DataHolder.sharedInstance.firUser = usr
+            print("User ",usr.email," signing out!")    //TODO:why is there a warning to force-unwrap the value?
+            do {
+                try Auth.auth().signOut()
             }
-        catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
+            catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+            //set the VC to it's root
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initial = storyboard.instantiateInitialViewController()
+            UIApplication.shared.keyWindow?.rootViewController = initial
+//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+//            self.present(vc!, animated: true, completion: nil)
+            }
         }
-        //set the VC to it's root
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initial = storyboard.instantiateInitialViewController()
-        UIApplication.shared.keyWindow?.rootViewController = initial
-        //let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
-        //self.present(vc!, animated: true, completion: nil)
     }
     
     

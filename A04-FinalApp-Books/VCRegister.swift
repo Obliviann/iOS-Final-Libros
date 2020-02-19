@@ -37,6 +37,7 @@ class VCRegister: UIViewController {
     }
     
     @IBAction func createAccountBtn(_ sender: UIButton) {
+        print("registerbtn clicked!")
         if (password.text != passConfirm.text) {
             let alertController = UIAlertController(title: "Password does not match", message: "Please re-type password", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -65,7 +66,7 @@ class VCRegister: UIViewController {
                             }
                         }
                     }
-                    let alertCont = UIAlertController(title: "You have created an account!", message: "Go to the LogIn page so you can Sign In with your new account", preferredStyle: .alert)//vs .actionSheet (greyish)
+                    let alertCont = UIAlertController(title: "You have created an account!", message: "We will automatically Sign you In with your new account", preferredStyle: .alert)//vs .actionSheet (greyish)
                     let alertAct = UIAlertAction(title: "Neat, take me there pls", style: .cancel, handler: {action in self.loginBtn(sender)})
                     alertCont.addAction(alertAct)
                     self.present(alertCont, animated: true)

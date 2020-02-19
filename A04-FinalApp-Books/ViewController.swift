@@ -47,14 +47,15 @@ class ViewController: UIViewController {
     }
 
     @IBAction func login(_ sender: Any){
+        print("loginbtn clicked!")
         Auth.auth().signIn(withEmail: email.text!, password: pass.text!) { (authDataResult, error) in
             if error == nil {
                 Auth.auth().addStateDidChangeListener { (auth, user) in //vs. let user = Auth.auth().currentUser
-                if let usr = user {
-                    //DataHolder.sharedInstance.firUser = usr
-                    print("User ",usr.email," signed in")
-                    self.performSegue(withIdentifier: "loginSuccess", sender: self)
-                }
+                    if let usr = user {
+                        DataHolder.sharedInstance.firUser = usr
+                        print(usr.email," signed in")
+                        self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                    }
                 }
             }else{
                 print("ERROR EN LOGIN: ",error!)
