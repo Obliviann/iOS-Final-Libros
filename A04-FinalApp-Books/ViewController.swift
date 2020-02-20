@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var pass: UITextField!
 
+    var usr: User?   //*
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,32 +31,25 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //TODO: do not sign in automatically after sign up.
-        //TODO: it's called twice before creating usr ???. Why doen's this if work   ????
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            if let usr = user {
-                //if usr.isEmailVerified {
-                //DataHolder.sharedInstance.firUser = usr
-                    print(usr.email," is already signed in")
-                    self.performSegue(withIdentifier: "loginSuccess", sender: self)
-                //TODO: self.login((Any).self) //-> throws "the pass is invalid of usr does not have a pass" err
-                //}
-            }
+        //TODO: it's called twice before creating usr ???. Why doesn't this if work   ????
+        //usr = DataHolder.sharedInstance.firUser                       //TODO: FIX, not working. Always going to profile (but not creating collection)
+        if usr != nil {                                                 //vs if Auth.auth().currentUser != nil
+            //if usr.isEmailVerified {
+            print(usr?.email ," is already signed in")
+                self.performSegue(withIdentifier: "loginSuccess", sender: self)
+            //TODO: self.login((Any).self) //-> throws "the pass is invalid of usr does not have a pass" err
+            //}
         }
-        //same as (but better) than:
-        //if Auth.auth().currentUser != nil {
-        //self.performSegue(withIdentifier: "loginSuccess", sender: nil)
-        //}
     }
 
     @IBAction func login(_ sender: Any){
         Auth.auth().signIn(withEmail: email.text!, password: pass.text!) { (authDataResult, error) in
             if error == nil {
-                Auth.auth().addStateDidChangeListener { (auth, user) in //vs. let user = Auth.auth().currentUser
-                if let usr = user {
-                    //DataHolder.sharedInstance.firUser = usr
-                    print("User ",usr.email," signed in")
+                self.usr = DataHolder.sharedInstance.firUser            //TODO: why does it need .self? (por estar dentro de un {} más ?)
+                //print("why is usr nil?")                              //*unless I call it inside here, urs is nil
+                if self.usr != nil {
+                    print("User ",self.usr?.email," signed in")
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
-                }
                 }
             }else{
                 print("ERROR EN LOGIN: ",error!)

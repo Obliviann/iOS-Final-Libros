@@ -12,6 +12,8 @@ import FirebaseAuth
 
 class VCProfile: UIViewController {
 
+    var usr:User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -24,16 +26,14 @@ class VCProfile: UIViewController {
     
     @IBAction func logOutAction(_ sender: UIButton) {
         do {
-            Auth.auth().addStateDidChangeListener { (auth, user) in
-                print("Why is is not getting in here??")
-                if let usr = user {
-                    //DataHolder.sharedInstance.firUser = usr
-                    print("User ",usr.email," signing out!")    //TODO:why do I need to force-unwrap the value?
-                }
+            usr = DataHolder.sharedInstance.firUser
+            if usr != nil {
+                print("User ",usr?.email," signing out!")    //TODO:why do I need to force-unwrap the value?
+                try Auth.auth().signOut()
             }
-            try Auth.auth().signOut()
-            print("Im out!")
-        } catch let signOutError as NSError {
+            print("user is ",self.usr?.email) //TODO: why is user not nil?????
+        }
+        catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
         //set the VC to it's root
