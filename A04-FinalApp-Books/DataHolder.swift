@@ -15,7 +15,7 @@ import FirebaseFirestore
 protocol DHDelegate {
     //https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseUser.html
     //Represents a user. Fb Auth does not attempt to validate users when loading them from the keychain.
-    //func DHUserLogin(userr: User)
+    //func DHUserLogin(userr: User)                         TODO: do not understand this function
 }
 
 //static class that will maintain data consistency between views
@@ -46,17 +46,17 @@ class DataHolder: NSObject {
         //We set a listener on the FIRAuth obj to GET THE CURRENTLY SIGNED-IN USER
         //Ensures the object isn't in an intermediate state—such as initialization—when you get the current user
         //Gets called whenever the user's sing-in/auth state changes
-        Auth.auth().addStateDidChangeListener { (auth, user) in
+        Auth.auth().addStateDidChangeListener { (auth, user) in //**
             print("listener called")
             //Eliminamos el opcional ? aka su posibilidad de que sea nil, a 'user' type User.
             //Same as: if user != nil
             if let usr = user {
                 //le asignamos la var declarada de tipo User, el valor que nos devuelve el listener
-                DataHolder.sharedInstance.firUser = usr //whynot self (bcs of static       ?????)
+                DataHolder.sharedInstance.firUser = usr
                 //self.delegate?.DHUserLogin(userr: usr)
             }
         }
-        //same as (but better than):
+        //** same as (but better than):
         //let user = Auth.auth().currentUser
         //if let usr = user { ... }
     }
