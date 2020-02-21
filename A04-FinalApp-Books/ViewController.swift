@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import CoreData
 
 class ViewController: UIViewController {
     
@@ -20,6 +21,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        // TODO: comprobar que los datos están almacenados en Core Data. call
+        if CDPersistenceService.fetchFromCoreData(){
+            print("work!!")
+            self.performSegue(withIdentifier: "loginSuccess", sender: self)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,10 +38,10 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         //TODO: do not sign in automatically after sign up.
         //TODO: it's called twice before creating usr ???. Why doesn't this if work   ????
-        //usr = DataHolder.sharedInstance.firUser                       //TODO: FIX, not working. Always going to profile (but not creating collection)
-        if usr != nil {                                                 //vs if Auth.auth().currentUser != nil
+        self.usr = DataHolder.sharedInstance.firUser                       //TODO: FIX, not working. Always going to profile (but not creating collection)
+        if let user = usr {                                    //vs if Auth.auth().currentUser != nil
             //if usr.isEmailVerified {
-            print(usr?.email ," is already signed in")
+            print(user.email ," is already signed in")
                 self.performSegue(withIdentifier: "loginSuccess", sender: self)
             //TODO: self.login((Any).self) //-> throws "the pass is invalid of usr does not have a pass" err
             //}
@@ -50,6 +56,7 @@ class ViewController: UIViewController {
                 if self.usr != nil {
                     print("User ",self.usr?.email," signed in")
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                    DataHolder.sharedInstance.saveDataOnCoreData(email: (self.usr?.email)!)
                 }
             }else{
                 print("ERROR EN LOGIN: ",error!)

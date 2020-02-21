@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import CoreData
 
 //2
 protocol DHDelegate {
@@ -64,6 +65,26 @@ class DataHolder: NSObject {
 //    func detachStateListener() {
 //        Auth.auth().removeStateDidChangeListener(handle!)
 //    }
+    
+    func saveDataOnCoreData(email:String) {
+        //CD1. we refer to the container set up in AppDelegates
+        //let appDel = UIApplication.shared.delegate as! AppDelegate
+        //CD2. we create a context from this container
+        //let context = appDel.persistentContainer.viewContext
+        //CD3. create an Entity (given the one-'Users'- we've just created in the Data Model)
+        //let entity = NSEntityDescription.entity(forEntityName: "Users", in: context)
+        //NO NEED TO DO THE PREVIOUS SINCE CONTAINTER ISN'T IN APPDELEGATE ANYMORE, ints in:
+        CDPersistenceService.deleteAllCodesRecords()
+        
+        //create new 'users' record
+        let users = Users(context: CDPersistenceService.context) //vs. NSManagedObject(entity: entity!, insertInto: context)
+        //Set values for the records for each key
+        users.setValue(email, forKey: "email")
+        print("value ", email," saved")
+        if !CDPersistenceService.saveContext(){
+            print("data not saved")
+        }
+    }
 }
 
 /* With this change, timestamps stored in Cloud Firestore will be read back as Firebase Timestamp objects instead of as system Date objects. So you will also need to update code expecting a Date to instead expect a Timestamp. For example:

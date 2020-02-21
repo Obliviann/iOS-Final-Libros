@@ -16,6 +16,7 @@ class VCRegister: UIViewController {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var passConfirm: UITextField!
+    @IBOutlet weak var usrname: UITextField!
     
     var usr:User?
     
@@ -53,7 +54,7 @@ class VCRegister: UIViewController {
                                                                             //TODO: does not code until usr signs in
                         let database = DataHolder.sharedInstance.db
                         var reference = DataHolder.sharedInstance.docRef
-                        var dataToSave: [String : Any] = ["email":self.usr?.email]
+                        var dataToSave: [String : Any] = ["email":self.usr?.email, "username": self.usrname.text!]
                         reference = database?.collection("users").document((self.usr?.uid)!)
                         reference?.setData(dataToSave) { (err) in
                             if let err = err {
@@ -66,11 +67,12 @@ class VCRegister: UIViewController {
                     }
                     //we logout to avoid automatic sign in
                     do {
-                        if self.usr != nil {
+                        if let user = self.usr, let email = user.email {        //we don't eliminate optional with != nil, only with if let...
                             try Auth.auth().signOut()
-                            print("User ",self.usr?.email,"signin eliminated")      //**
+                            print("User ",email,"signin eliminated")      //**
+                            print("user is ",email)
                         }
-                        print("user is ",self.usr?.email)                          //TODO: why is user not nil?????
+                                                 //TODO: why is user not nil?????
                     }
                     catch let signOutError as NSError {
                         print ("Error signing out: %@", signOutError)
@@ -81,7 +83,7 @@ class VCRegister: UIViewController {
                     alertCont.addAction(alertAct)
                     self.present(alertCont, animated: true)
                 }
-                else{
+                else{                                                           //TODO: make usrnam mandatory
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(defaultAction)
