@@ -70,7 +70,6 @@ class VCRegister: UIViewController {
                         if let user = self.usr, let email = user.email {        //we don't eliminate optional with != nil, only with if let...
                             try Auth.auth().signOut()
                             print("User ",email,"signin eliminated")      //**
-                            print("user is ",email)
                         }
                                                  //TODO: why is user not nil?????
                     }

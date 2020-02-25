@@ -52,8 +52,8 @@ class ViewController: UIViewController {
                 if self.usr != nil {
                     print("User ",self.usr?.email," signed in")
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
-                    //CORE DATA
-                    DataHolder.sharedInstance.saveDataOnCoreData(email: (self.usr?.email)!)
+                    //CORE DATA    TODO: when I eliminate mandatory sign in after sign up, this should be on sign up
+                    CDPersistenceService.saveOnCoreData(email: (self.usr?.email)!)
                 }
             }else{
                 print("ERROR EN LOGIN: ",error!)
