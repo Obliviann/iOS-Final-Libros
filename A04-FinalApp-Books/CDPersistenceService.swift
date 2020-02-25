@@ -72,12 +72,13 @@ class CDPersistenceService {
     static func deleteAllCodesRecords() {
         let context = persistentContainer.viewContext
         
-        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Users")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Users")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
         
         do {
             try context.execute(deleteRequest)
             try context.save()
+            print("CD:fetch request deleted")
         } catch {
             print ("There was an error")
         }
@@ -94,13 +95,13 @@ class CDPersistenceService {
             let result = try context.fetch(request)
             
             for data in result as! [NSManagedObject] {
-                print("HIIIIII")
-                print(data.value(forKey: "email") as! String)
+                print("fetched form core data:",data.value(forKey: "email") as! String)
                 resss=true
             }
         } catch {
             print("Failed")
         }
+        print(resss)
         return resss
     }
 

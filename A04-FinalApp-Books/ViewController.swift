@@ -16,16 +16,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var pass: UITextField!
 
-    var usr: User?   //*
+    var usr: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        // TODO: comprobar que los datos están almacenados en Core Data. call
-        if CDPersistenceService.fetchFromCoreData(){
-            print("work!!")
-            self.performSegue(withIdentifier: "loginSuccess", sender: self)
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,26 +31,28 @@ class ViewController: UIViewController {
     //remember user
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //TODO: do not sign in automatically after sign up.
-        //TODO: it's called twice before creating usr ???. Why doesn't this if work   ????
-        self.usr = DataHolder.sharedInstance.firUser                       //TODO: FIX, not working. Always going to profile (but not creating collection)
-        if let user = usr {                                    //vs if Auth.auth().currentUser != nil
-            //if usr.isEmailVerified {
+        /*self.usr = DataHolder.sharedInstance.firUser                       //TODO: not working
+        if let user = usr {                                   //vs if Auth.auth().currentUser != nil
+            if usr.isEmailVerified {
             print(user.email ," is already signed in")
                 self.performSegue(withIdentifier: "loginSuccess", sender: self)
-            //TODO: self.login((Any).self) //-> throws "the pass is invalid of usr does not have a pass" err
-            //}
+            }
+        }*/
+        // TODO: mostrar los datos están almacenados en Core Data
+        if CDPersistenceService.fetchFromCoreData(){
+            self.performSegue(withIdentifier: "loginSuccess", sender: self)
+            //TODO: why wans't segue working when this meth was in viewDidLoad?
         }
     }
 
     @IBAction func login(_ sender: Any){
         Auth.auth().signIn(withEmail: email.text!, password: pass.text!) { (authDataResult, error) in
             if error == nil {
-                self.usr = DataHolder.sharedInstance.firUser            //TODO: why does it need .self? (por estar dentro de un {} más ?)
-                //print("why is usr nil?")                              //*unless I call it inside here, urs is nil
+                self.usr = DataHolder.sharedInstance.firUser //TODO: por estar dentro de un {} más necesita .self?
                 if self.usr != nil {
                     print("User ",self.usr?.email," signed in")
                     self.performSegue(withIdentifier: "loginSuccess", sender: self)
+                    //CORE DATA
                     DataHolder.sharedInstance.saveDataOnCoreData(email: (self.usr?.email)!)
                 }
             }else{

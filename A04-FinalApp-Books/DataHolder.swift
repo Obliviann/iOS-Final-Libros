@@ -73,14 +73,14 @@ class DataHolder: NSObject {
         //let context = appDel.persistentContainer.viewContext
         //CD3. create an Entity (given the one-'Users'- we've just created in the Data Model)
         //let entity = NSEntityDescription.entity(forEntityName: "Users", in: context)
-        //NO NEED TO DO THE PREVIOUS SINCE CONTAINTER ISN'T IN APPDELEGATE ANYMORE, ints in:
-        CDPersistenceService.deleteAllCodesRecords()
+        //NO NEED TO DO THE PREVIOUS SINCE CONTAINTER ISN'T IN APPDELEGATE ANYMORE, its in:
+        //CDPersistenceService.deleteAllCodesRecords()          -- TODO: not necessary right?
         
         //create new 'users' record
         let users = Users(context: CDPersistenceService.context) //vs. NSManagedObject(entity: entity!, insertInto: context)
         //Set values for the records for each key
         users.setValue(email, forKey: "email")
-        print("value ", email," saved")
+        print("CD:value ", email," saved")
         if !CDPersistenceService.saveContext(){
             print("data not saved")
         }

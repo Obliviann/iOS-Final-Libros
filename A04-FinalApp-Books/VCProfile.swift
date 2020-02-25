@@ -28,10 +28,11 @@ class VCProfile: UIViewController {
         do {
             usr = DataHolder.sharedInstance.firUser
             if usr != nil {
-                print("User ",usr?.email," signing out!")    //TODO:why do I need to force-unwrap the value?
+                print("User ",usr?.email," signing out!")    //TODO: why do I need to force-unwrap the value?
                 try Auth.auth().signOut()
+                CDPersistenceService.deleteAllCodesRecords()
             }
-            print("user is ",self.usr?.email) //TODO: why is user not nil?????
+            //print("user is ",self.usr?.email)
         }
         catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
